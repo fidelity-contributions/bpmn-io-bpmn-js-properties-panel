@@ -1,7 +1,8 @@
 import TestContainer from 'mocha-test-container-support';
 
 import {
-  act
+  act,
+  waitFor
 } from '@testing-library/preact';
 
 import {
@@ -120,6 +121,8 @@ describe('provider/zeebe - ScriptImplementationProps', function() {
     }));
 
 
+    // TODO(@barmac): this test is fails as false-positive when run locally on MacOS as part of the full test suite,
+    // cf. https://github.com/bpmn-io/bpmn-js-properties-panel/pull/1111#pullrequestreview-2635770727
     it('should display script', inject(async function(elementRegistry, selection) {
 
       // given
@@ -139,6 +142,8 @@ describe('provider/zeebe - ScriptImplementationProps', function() {
     }));
 
 
+    // TODO(@barmac): this test is fails as false-positive when run locally on MacOS as part of the full test suite,
+    // cf. https://github.com/bpmn-io/bpmn-js-properties-panel/pull/1111#pullrequestreview-2635770727
     it('should display jobWorker', inject(async function(elementRegistry, selection) {
 
       // given
@@ -346,19 +351,14 @@ function getTaskHeaders(element) {
   return getExtensionElementsList(businessObject, 'zeebe:TaskHeaders')[ 0 ];
 }
 
-async function expectEdited(container, exists) {
+function expectEdited(container, exists) {
+  return waitFor(() => {
+    const indicator = domQuery(`${GROUP_SELECTOR} .bio-properties-panel-dot`, container);
 
-  await wait(50);
-
-  const indicator = domQuery(`${GROUP_SELECTOR} .bio-properties-panel-dot`, container);
-
-  if (exists) {
-    expect(indicator).to.exist;
-  } else {
-    expect(indicator).not.to.exist;
-  }
-}
-
-function wait(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+    if (exists) {
+      expect(indicator).to.exist;
+    } else {
+      expect(indicator).not.to.exist;
+    }
+  });
 }
