@@ -6,6 +6,20 @@ All notable changes to [bpmn-js-properties-panel](https://github.com/bpmn-io/bpm
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.41.1
+
+_Re-release of `v5.41.0` with fixed changelog._
+
+## 5.41.1
+
+* `DEPS`: update to `@bpmn-io/extract-process-variables@1.0.1`
+
+## 5.41.0
+
+* `FEAT`: support job worker implementation of `bpmn:AdHocSubProcess` ([#1144](https://github.com/bpmn-io/bpmn-js-properties-panel/pull/1144))
+* `DEPS`: update to `zeebe-bpmn-moddle@1.11.0`
+* `DEPS`: update to `min-dash@4.2.3`
+
 ## 5.40.0
 
 * `FEAT`: add output collection props for `bpmn:AdHocSubProcess` ([#1143](https://github.com/bpmn-io/bpmn-js-properties-panel/pull/1143))
